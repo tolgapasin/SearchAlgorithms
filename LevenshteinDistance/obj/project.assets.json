@@ -14,9 +14,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\dev\\repos\\SearchAlgorithms\\LevenshteinDistance\\LevenshteinDistance.csproj",
-      "projectName": "LevenshteinDistance",
-      "projectPath": "C:\\dev\\repos\\SearchAlgorithms\\LevenshteinDistance\\LevenshteinDistance.csproj",
+      "projectUniqueName": "C:\\dev\\repos\\SearchAlgorithms\\LevenshteinDistance\\Algorithms.csproj",
+      "projectName": "Algorithms",
+      "projectPath": "C:\\dev\\repos\\SearchAlgorithms\\LevenshteinDistance\\Algorithms.csproj",
       "packagesPath": "C:\\Users\\tolga\\.nuget\\packages\\",
       "outputPath": "C:\\dev\\repos\\SearchAlgorithms\\LevenshteinDistance\\obj\\",
       "projectStyle": "PackageReference",

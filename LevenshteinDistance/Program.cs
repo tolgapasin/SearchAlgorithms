@@ -1,109 +1,114 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 
-namespace LevenshteinDistance
+namespace Algorithms
 {
-    /// <summary>
-    /// Contains approximate string matching
-    /// </summary>
-    static class LevenshteinDistance
-    {
-        /// <summary>
-        /// Compute the distance between two strings.
-        /// </summary>
-        public static int Compute(string s, string t)
-        {
-            int n = s.Length;
-            int m = t.Length;
-            int[,] d = new int[n + 1, m + 1];
-
-            // Step 1
-            if (n == 0)
-            {
-                return m;
-            }
-
-            if (m == 0)
-            {
-                return n;
-            }
-
-            // Step 2
-            for (int i = 0; i <= n; d[i, 0] = i++)
-            {
-            }
-
-            for (int j = 0; j <= m; d[0, j] = j++)
-            {
-            }
-
-            // Step 3
-            for (int i = 1; i <= n; i++)
-            {
-                //Step 4
-                for (int j = 1; j <= m; j++)
-                {
-                    // Step 5
-                    int cost = (t[j - 1] == s[i - 1]) ? 0 : 1;
-
-                    // Step 6
-                    d[i, j] = Math.Min(
-                        Math.Min(d[i - 1, j] + 1, d[i, j - 1] + 1),
-                        d[i - 1, j - 1] + cost);
-                }
-            }
-            // Step 7
-            return d[n, m];
-        }
-    }
-
     class Program
     {
         static void Main()
         {
             string[] words = File.ReadAllLines(@"C:\dev\repos\SearchAlgorithms\LevenshteinDistance\words.txt");
-            //    new List<string[]>
-            //{
-            //    new string[]{"ant", "aunt"},
-            //    new string[]{"Sam", "Samantha"},
-            //    new string[]{"clozapine", "olanzapine"},
-            //    new string[]{"flomax", "volmax"},
-            //    new string[]{"toradol", "tramadol"},
-            //    new string[]{"kitten", "sitting"}
-            //};
+
             string testWord = "test";
 
-            DateTime startTime = DateTime.Now;
-            Console.WriteLine("Computing...");
+            string[] distancesParallel = new string[words.Length];
+            string[] distances = new string[words.Length];
 
-            List<string> likeWords = new List<string>();
 
-            foreach (string word in words)
-            {
-                
-                int distance = LevenshteinDistance.Compute(testWord, word);
 
-                Console.WriteLine("{0} -> {1} = {2}",
-                    testWord,
-                    word,
-                    distance);
 
-                if (distance < 2)
+            DateTime startTimeLP = DateTime.Now;
+            Console.WriteLine("Computing Levenshtein Parallel...");
+
+            Parallel.For(0, words.Length,
+                index =>
                 {
-                    likeWords.Add(word);
-                }
+                    int distance = LevenshteinDistance.Compute(testWord, words[index]);
+                    distancesParallel[index] = distance.ToString();
+                });
+
+            File.WriteAllLines(@"c:/temp/distancesParallel.txt", distancesParallel);
+
+            DateTime endTimeLP = DateTime.Now;
+            TimeSpan totalTimeLP = endTimeLP.Subtract(startTimeLP);
+            Console.WriteLine("Total time taken: " + totalTimeLP);
+
+
+
+
+
+            DateTime startTimeL = DateTime.Now;
+            Console.WriteLine("Computing Levenshtein...");
+
+            for (int i=0; i<words.Length; i++)
+            {
+                int distance = LevenshteinDistance.Compute(testWord, words[i]);
+
+                distances[i] = distance.ToString();
             }
 
-            DateTime endTime = DateTime.Now;
-            TimeSpan totalTime = endTime.Subtract(startTime);
-            Console.WriteLine("Total time taken: " + totalTime);
+            File.WriteAllLines(@"c:/temp/distances.txt", distances);
 
-            Console.WriteLine("Did you mean: ");
-            foreach (string word in likeWords) 
+            DateTime endTimeL = DateTime.Now;
+            TimeSpan totalTimeL = endTimeL.Subtract(startTimeL);
+            Console.WriteLine("Total time taken: " + totalTimeL);
+
+
+
+
+
+
+            var winkler = new JaroWinkler();
+
+            string[] similaritiesParallel = new string[words.Length + 1];
+            string[] similarities = new string[words.Length + 1];
+
+
+
+
+            DateTime startTimeWP = DateTime.Now;
+            Console.WriteLine("Computing Winkler Parallel...");
+
+            Parallel.For(0, words.Length,
+                index =>
+                {
+                    double similarity = winkler.Similarity(testWord, words[index]);
+                    similaritiesParallel[index] = similarity.ToString();
+                });
+
+            File.WriteAllLines(@"c:/temp/similaritiesParallel.txt", similaritiesParallel);
+
+            DateTime endTimeWP = DateTime.Now;
+            TimeSpan totalTimeWP = endTimeWP.Subtract(startTimeWP);
+            Console.WriteLine("Total time taken: " + totalTimeWP);
+
+
+
+
+
+            DateTime startTimeW = DateTime.Now;
+            Console.WriteLine("Computing Winkler...");
+
+            for (int i = 0; i < words.Length; i++)
             {
-                Console.WriteLine(word);
-            } 
+                double similarity = winkler.Similarity(testWord, words[i]);
+                similarities[i] = similarity.ToString();
+            }
+
+            
+            File.WriteAllLines(@"c:/temp/similarities.txt", similarities);
+
+            DateTime endTimeW = DateTime.Now;
+            TimeSpan totalTimeW = endTimeW.Subtract(startTimeW);
+            Console.WriteLine("Total time taken: " + totalTimeW);
+
+
+
+
+
+            Console.ReadLine();
         }
     }
 }
