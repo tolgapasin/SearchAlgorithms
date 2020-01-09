@@ -1,0 +1,11 @@
+C:\dev\repos\SearchAlgorithms\LevenshteinDistance\obj\Debug\netcoreapp3.1\LevenshteinDistance.csprojAssemblyReference.cache
+C:\dev\repos\SearchAlgorithms\LevenshteinDistance\obj\Debug\netcoreapp3.1\LevenshteinDistance.AssemblyInfoInputs.cache
+C:\dev\repos\SearchAlgorithms\LevenshteinDistance\obj\Debug\netcoreapp3.1\LevenshteinDistance.AssemblyInfo.cs
+C:\dev\repos\SearchAlgorithms\LevenshteinDistance\bin\Debug\netcoreapp3.1\LevenshteinDistance.exe
+C:\dev\repos\SearchAlgorithms\LevenshteinDistance\bin\Debug\netcoreapp3.1\LevenshteinDistance.deps.json
+C:\dev\repos\SearchAlgorithms\LevenshteinDistance\bin\Debug\netcoreapp3.1\LevenshteinDistance.runtimeconfig.json
+C:\dev\repos\SearchAlgorithms\LevenshteinDistance\bin\Debug\netcoreapp3.1\LevenshteinDistance.runtimeconfig.dev.json
+C:\dev\repos\SearchAlgorithms\LevenshteinDistance\bin\Debug\netcoreapp3.1\LevenshteinDistance.dll
+C:\dev\repos\SearchAlgorithms\LevenshteinDistance\bin\Debug\netcoreapp3.1\LevenshteinDistance.pdb
+C:\dev\repos\SearchAlgorithms\LevenshteinDistance\obj\Debug\netcoreapp3.1\LevenshteinDistance.dll
+C:\dev\repos\SearchAlgorithms\LevenshteinDistance\obj\Debug\netcoreapp3.1\LevenshteinDistance.pdb
